@@ -1,15 +1,18 @@
-import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
+import { Sono, Noto_Serif_Display } from 'next/font/google';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+// Using Google Fonts with Next.js
+const sono = Sono({
+  weight: ['200', '300', '400', '500', '600', '700', '800'], // Specify the desired weights
+  subsets: ['latin'],
+  variable: '--font-sono',
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const notoSerifDisplay = Noto_Serif_Display({
+  weight: ['200', '300', '400', '500', '600', '700', '800'], // Specify the desired weights
+  subsets: ['latin'],
+  variable: '--font-noto-serif-display',
 });
 
 export const metadata = {
@@ -21,9 +24,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sono.variable} ${notoSerifDisplay.variable} bg-white text-zinc-600 dark:bg-black dark:text-zinc-200 antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
